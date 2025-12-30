@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marks Calculator</title>
+    <style>
+        body {
+            background: #f2f4f8;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            background: #e02626;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #5c51d3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h3>Enter your marks</h3>
+    <input type="text" id="marks" placeholder="54,58,75,69">
+    <button onclick="totalMarks()">Calculate Total</button>
+    <div class="result" id="output"></div>
+</div>
+
+<script>
+    function totalMarks() {
+        let values = document.getElementById("marks").value.split(",");
+        let total = 0;
+
+        for (let i = 0; i < values.length; i++) {
+            total += Number(values[i]);
+        }
+
+        document.getElementById("output").innerText = "Total: " + total;
+    }
+</script>
+
+</body>
+</html>
