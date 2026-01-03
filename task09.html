@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Stats Tool</title>
+    <style>
+        body {
+            background: #f2f4f7;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            width: 380px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #4338ca;
+            transform: scale(1.03);
+        }
+
+        .result-box {
+            margin-top: 20px;
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .result-box p {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="title">📊 Number Stats Tool</div>
+
+    <input type="text" id="numbers" placeholder="Enter numbers (e.g. 5, 10, 20)">
+
+    <button onclick="analyzeNumbers()">Calculate</button>
+
+    <div class="result-box" id="output">
+        <p><span class="label">Total:</span> -</p>
+        <p><span class="label">Average:</span> -</p>
+        <p><span class="label">Highest:</span> -</p>
+        <p><span class="label">Lowest:</span> -</p>
+    </div>
+</div>
+
+<script>
+    function analyzeNumbers() {
+        let input = document.getElementById("numbers").value;
+        let arr = input.split(",").map(Number);
+
+        if (arr.some(isNaN)) {
+            alert("Please enter only numbers separated by commas");
+            return;
+        }
+
+        let sum = arr.reduce((a, b) => a + b, 0);
+        let avg = (sum / arr.length).toFixed(2);
+        let max = Math.max(...arr);
+        let min = Math.min(...arr);
+
+        document.getElementById("output").innerHTML = `
+            <p><span class="label">Total:</span> ${sum}</p>
+            <p><span class="label">Average:</span> ${avg}</p>
+            <p><span class="label">Highest:</span> ${max}</p>
+            <p><span class="label">Lowest:</span> ${min}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>ś

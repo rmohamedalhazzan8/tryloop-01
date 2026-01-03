@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple React ToDo</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .todo-box {
+      background: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    input {
+      width: 75%;
+      padding: 6px;
+    }
+
+    button {
+      padding: 6px 10px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+
+    li {
+      background: #eee;
+      padding: 6px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function TodoApp() {
+      const [task, setTask] = React.useState("");
+      const [tasks, setTasks] = React.useState([]);
+
+      function addTask() {
+        if (task !== "") {
+          setTasks([...tasks, task]);
+          setTask("");
+        }
+      }
+
+      function deleteTask(index) {
+        const newTasks = tasks.filter((_, i) => i !== index);
+        setTasks(newTasks);
+      }
+
+      return (
+        <div className="todo-box">
+          <h2>To-Do List</h2>
+
+          <input
+            type="text"
+            value={task}
+            placeholder="Enter task"
+            onChange={(e) => setTask(e.target.value)}
+          />
+          <button onClick={addTask}>Add</button>
+
+          <ul>
+            {tasks.map((t, index) => (
+              <li key={index}>
+                {t}
+                <button onClick={() => deleteTask(index)}>❌</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<TodoApp />);
+  </script>
+
+</body>
+</html>
